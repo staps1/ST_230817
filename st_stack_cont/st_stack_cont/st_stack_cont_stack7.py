@@ -1,12 +1,10 @@
-import os
 from aws_cdk import (
     App,
     Stack,
     Tags,
     aws_s3 as s3,
     aws_iam as iam,
-    aws_lambda as _lambda,
-    aws_s3_notifications as s3n,
+    aws_lambda as _lambda
 )
 from constructs import Construct
 
