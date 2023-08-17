@@ -4,7 +4,6 @@ from aws_cdk import (
     Tags,
     aws_s3 as s3,
     aws_iam as iam,
-    aws_lambda as _lambda
 )
 from constructs import Construct
 
@@ -27,19 +26,3 @@ class StStackContStack(Stack):
                resources = [bucket.arn_for_objects("*")],
                principals = [iam.AccountRootPrincipal()]
            ))
-
-       role = iam.Role(self, "STRoleTest",
-           assumed_by = iam.ServicePrincipal("lambda.amazonaws.com")
-           )
-       
-       role.add_to_policy(iam.PolicyStatement(
-           resources = ["*"],
-           actions = ["s3:*"]
-           ))
-
-       fn = _lambda.Function(self, 'ST_Function',
-           runtime = _lambda.Runtime.PYTHON_3_9,
-           handler = "index.handler",
-           code = _lambda.Code.from_asset("st_lambda"),
-           role = role
-           )
